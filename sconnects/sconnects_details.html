@@ -69,6 +69,7 @@
         overflow-y:scroll;*/
             }
     </style>
+    <script type="text/javascript" src="../assets/js/app/conf.js"></script>
     <script type="text/javascript" src="../assets/js/d3.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="../assets/js/underscore-min.js"></script>
@@ -76,10 +77,10 @@
 
     <script type="text/javascript">
 
-        var defaultPath = "vast"
+        var defaultPath = basePath;
         var dateFromQueryString = getQueryString().dataDate;
 
-        var csvpath = "../data/user/"
+        var csvpath = basecsvpath;
 
         if (dateFromQueryString != undefined && dateFromQueryString != null)
             csvpath = csvpath + dateFromQueryString.replace(/-/g, "");
@@ -302,7 +303,7 @@
                 }
 
                 function chordTip(d) {
-                    var p = d3.format(".4%"), q = d3.format(",.3r")
+                    var p = d3.format(".4%"), q = d3.format(",.3r");
                     return "<br/>Chord Info:<br/>"
                       + numberFormat(d.svalue) + " avg bytes from IP: "
                       + d.sname + " to IP: " + d.tname
@@ -312,7 +313,7 @@
                 }
 
                 function groupTip(d) {
-                    var p = d3.format(".4%"), q = d3.format(",.3r")
+                    var p = d3.format(".4%"), q = d3.format(",.3r");
                     return "Group Info:<br/>"
                         + d.gname + " : " + numberFormat(d.gvalue) + " Avg Bytes <br/>"
                         + p(d.gvalue / d.mtotal) + " of Matrix Total (" + numberFormat(d.mtotal) + ")"

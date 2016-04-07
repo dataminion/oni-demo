@@ -57,8 +57,8 @@
 		function highlightEdge(id) {
 		  d3.select("#" + id).style("stroke", "yellow");
 		  //d3.select("#" + id).classed('.active',true);
-		};
-		</script>
+        }
+        </script>
 	</head>
 	<body>
 	<aside>Network View :: Suspicious Connects</aside>
@@ -68,6 +68,7 @@
 			</div>
 		</div>
 
+        <script type="text/javascript" src="../assets/js/app/conf.js"></script>
 		<script src="../assets/js/jquery.min.js"></script>
 		<script src="../assets/js/jquery-ui.min.js"></script>
 		<script src="../assets/js/bootstrap.min.js"></script>
@@ -78,7 +79,7 @@
 			$(function() {
 			   var coff = 250;
 
-                d3.csv('user/vast/lda_scores.csv', function(data) {
+                d3.csv(ldaScores, function(data) {
                     // data: lda_score_MIN,from_IP,to_IP
 
                     var nodes = d3.set(data.filter(function(d,i) {if ( i < coff && d.sev == 0) return d}).map(function(d) { return d.srcIP; })
@@ -218,7 +219,7 @@
                 			//load csv details on dbl click
 							function nodeclick(d) {
 									//
-									var fpath = "chord-" + d.ip.replace(/\./g,"_") + ".csv"
+									var fpath = "chord-" + d.ip.replace(/\./g,"_") + ".csv";
 									//alert(fpath)
 									parent.document.getElementById('detailView').contentWindow.chord(fpath);
 				  			}
@@ -226,7 +227,7 @@
 							function csvclick(d) {
 									//
 									var fpath = "edge-" + d.source.ip.replace(/\./g,"_") + "-" +
-											d.target.ip.replace(/\./g,"_") + ".tsv"
+											d.target.ip.replace(/\./g,"_") + ".tsv";
 									//alert(fpath)
 									parent.document.getElementById('detailView').contentWindow.details(fpath);
   							}

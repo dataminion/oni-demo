@@ -45,6 +45,7 @@
            background-image: linear-gradient(to bottom,#B1BABF 0,#939598 100%);
        }
     </style>
+        <script type="text/javascript" src="../assets/js/app/conf.js"></script>
     <script src="../assets/js/d3.min.js"></script>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/bootstrap-slider.min.js"></script>
@@ -70,25 +71,25 @@
     </div>
     <script type="text/javascript">
 
-        var defaultPath = "vast"
+        var defaultPath = basePath;
         var dateFromQueryString = getQueryString().dataDate;
 
-        var csvpath = "../data/user/"
+        var csvpath = basecsvpath;
 
         if (dateFromQueryString != undefined && dateFromQueryString != null)
             csvpath = csvpath + dateFromQueryString.replace(/-/g, "");
         else
             csvpath = csvpath + defaultPath;
 
-        csvpath = csvpath + "/lda_scores.csv"
+        csvpath = csvpath + baseldaScores;
 
-        var minSconnects = 0;
-
-        var maxSconnects = 250;
-
-        var coff = maxSconnects - minSconnects;
-
-        var ldaScoresData = [];
+//        var minSconnects = 0;
+//
+//        var maxSconnects = 250;
+//
+//        var coff = maxSconnects - minSconnects;
+//
+//        var ldaScoresData = [];
 
         function buildScoresTable() {
             if (ldaScoresData.length > 0)
@@ -181,7 +182,7 @@
         function csvClick(d) {
 
             var fpath = "edge-" + d.srcIP.replace(/\./g, "_") + "-" +
-            d.dstIP.replace(/\./g, "_") + "-" + d.Date.split(' ')[1].split(':')[0] + "-" + d.Date.split(' ')[1].split(':')[1] + ".tsv"
+            d.dstIP.replace(/\./g, "_") + "-" + d.Date.split(' ')[1].split(':')[0] + "-" + d.Date.split(' ')[1].split(':')[1] + ".tsv";
            
             parent.document.getElementById('detailView').contentWindow.details(fpath);
 
@@ -192,7 +193,7 @@
             parent.document.getElementById('vizView').contentWindow.selectEdge("k" + d.srcIP.replace(/\./g, "_") + "-" +
                 d.dstIP.replace(/\./g, "_"));
 
-            return;
+
 
         }
 
@@ -202,7 +203,7 @@
                 minSconnects = e.value.newValue[0];
             }
             else if (e.value.oldValue[1] != e.value.newValue[1]) {
-                maxSconnects = e.value.newValue[1]
+                maxSconnects = e.value.newValue[1];
                 minSconnects = e.value.newValue[1] - 150;
             }
             $("#dataRange").slider("setValue", [minSconnects, maxSconnects], true);
@@ -225,7 +226,7 @@
         }
 
         function filterDataByIpAndDrawTable(ip) {
-            var filteredData = ldaScoresData
+            var filteredData = ldaScoresData;
             if (ip != "" && ip != undefined && ip != null) {
                 filteredData = $.grep(ldaScoresData, function (d) {
                     return ip == d.srcIP || ip == d.dstIP;

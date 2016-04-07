@@ -95,6 +95,7 @@
             }
             
     </style>
+        <script type="text/javascript" src="../assets/js/app/conf.js"></script>
     <script src="../assets/js/d3.min.js"></script>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/bootstrap-slider.min.js"></script>
@@ -120,6 +121,7 @@
             </div>
         </div>
     </div>
+
     <script type="text/javascript">
 
         var norseRisks = {         
@@ -127,34 +129,34 @@
             medium: 1,
             high: 2,
             extreme: 3
-        }
+        };
 
         var gtiRisks = {
             low: 0,
             //unverified: 0,
             medium: 1,
             high:2            
-        }
+        };
 
-        var defaultPath = "vast"
+        var defaultPath = basePath;
         var dateFromQueryString = getQueryString().dataDate;
 
-        var csvpath = "../data/user/"
+        var csvpath = basecsvpath;
 
         if (dateFromQueryString != undefined && dateFromQueryString != null)
             csvpath = csvpath + dateFromQueryString.replace(/-/g, "");
         else
             csvpath = csvpath + defaultPath;
 
-        csvpath = csvpath + "/lda_scores.csv"
-
-        var minSconnects = 0;
-
-        var maxSconnects = 300;
-
-        var coff = maxSconnects - minSconnects;
-
-        var ldaScoresData = [];
+        csvpath = csvpath + baseldaScores;
+//
+//        var minSconnects = 0;
+//
+//        var maxSconnects = 300;
+//
+//        var coff = maxSconnects - minSconnects;
+//
+//        var ldaScoresData = [];
 
         function buildScoresTable() {
             if (ldaScoresData.length > 0) {
@@ -243,7 +245,7 @@
 
                          var html = d.value + ' <i class="fa fa-globe float-right ip-info"></i>';                               
                          var shieldClass = "low-risk";
-                         var norseRisk = 0
+                         var norseRisk = 0;
                          var gtiRisk = 0;
 
                          if (isSrcIpInternal) {
@@ -272,8 +274,8 @@
                              }
                          }
 
-                         norseRisk = norseRisk || 0
-                         gtiRisk = gtiRisk || 0
+                         norseRisk = norseRisk || 0;
+                         gtiRisk = gtiRisk || 0;
 
                          if (norseRisk > gtiRisk)
                              shieldClass = Object.keys(norseRisks)[norseRisk] + "-risk";
@@ -313,8 +315,10 @@
                         .html(html)
                         .style("visibility", "visible")
                         .style("top", function () { return (d3.event.pageY) + "px"; })
-                        .style("left", function () { return (d3.event.pageX) + "px"; });;
-                })
+                            .style("left", function () {
+                                return (d3.event.pageX) + "px";
+                            });
+                    })
                 .on("mouseout", function () {
                     d3.select("#tooltip")
                         .html("")
@@ -395,8 +399,10 @@
                         .html(html)
                         .style("visibility", "visible")
                         .style("top", function () { return (d3.event.pageY) + "px"; })
-                        .style("left", function () { return (d3.event.pageX) + "px"; });;
-                })
+                            .style("left", function () {
+                                return (d3.event.pageX) + "px";
+                            });
+                    })
                 .on("mouseout", function () {
                     d3.select("#tooltip")
                         .html("")
@@ -430,7 +436,7 @@
         function csvClick(d) {
 
             var fpath = "edge-" + d.srcIP.replace(/\./g, "_") + "-" +
-            d.dstIP.replace(/\./g, "_") + "-" + d.Date.split(' ')[1].split(':')[0] + "-" + d.Date.split(' ')[1].split(':')[1] + ".tsv"
+            d.dstIP.replace(/\./g, "_") + "-" + d.Date.split(' ')[1].split(':')[0] + "-" + d.Date.split(' ')[1].split(':')[1] + ".tsv";
 
             parent.document.getElementById('detailView').contentWindow.details(fpath);
 
@@ -441,7 +447,7 @@
             parent.document.getElementById('vizView').contentWindow.selectEdge("k" + d.srcIP.replace(/\./g, "_") + "-" +
                 d.dstIP.replace(/\./g, "_"));
 
-            return;
+
 
         }
 

@@ -21,7 +21,7 @@ function chordMpr (data) {
       _.each(mmap, function (b) {
        var recs = _.filter(data, function (row) {
           return filter(row, a, b);
-        })
+        });
         matrix[a.id][b.id] = accessor(recs, a, b);
       });
     });
@@ -48,7 +48,7 @@ function chordMpr (data) {
       }
     });
     return this;
-  }
+  };
   return mpr;
 }
 //*******************************************************************

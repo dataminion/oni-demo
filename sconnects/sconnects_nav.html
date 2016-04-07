@@ -9,6 +9,7 @@
             padding-bottom:0;
         }
     </style>
+        <script type="text/javascript" src="../assets/js/app/conf.js"></script>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/bootstrap-datepicker.min.js"></script>
     <script>
@@ -22,16 +23,16 @@
         function navigate(topic) {
             switch (topic) {
                 case "detect":
-                    nb = "http://10.54.10.133:8888/notebooks/ipython/user/vast/Threat_Detection_Demo.ipynb"
-                    viz = "http://10.54.10.133:8888/files/ipython/network.html"
+                    nb = "http://"+jupyterIP+":"+jupyterPort+"/notebooks/"+notebookPath+"Threat_Detection_Demo.ipynb";
+                    viz = "http://"+jupyterIP+":"+jupyterPort+"/files/other/network.html";
                     break;
                 case "response":
-                    nb = "http://10.54.10.133:8888/notebooks/ipython/user/vast/Threat_Response_Demo.ipynb"
-                    viz = "http://10.54.10.133:8888/files/ipython/flows.html"
+                    nb = "http://"+jupyterIP+":"+jupyterPort+"/notebooks/"+notebookPath+"Threat_Response_Demo.ipynb";
+                    viz ="http://"+jupyterIP+":"+jupyterPort+"/files/other/flows.html";
                     break;
                 case "analyze":
-                    nb = "http://10.54.10.133:8888/notebooks/ipython/user/vast/Pattern_Analysis.ipynb"
-                    viz = "http://10.54.10.133:8888/notebooks/ipython/user/vast/Signal_Analysis.ipynb"
+                    nb = "http://"+jupyterIP+":"+jupyterPort+"/notebooks/"+notebookPath+"Pattern_Analysis.ipynb";
+                    viz = "http://"+jupyterIP+":"+jupyterPort+"/notebooks/"+notebookPath+"Signal_Analysis.ipynb";
                     break;
                 default:
 
@@ -62,7 +63,7 @@
                 thisElem.className = thisElem.className == thisElem.name + '-hidden' ? thisElem.name : thisElem.name + '-hidden';
             }
             thisElem = document.getElementById(elemId);
-            thisElem.value = thisElem.value == "Hide" ? "Show" : "Hide"
+            thisElem.value = thisElem.value == "Hide" ? "Show" : "Hide";
             return false
         }
 

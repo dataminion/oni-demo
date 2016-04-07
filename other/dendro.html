@@ -47,6 +47,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="../assets/js/app/conf.js"></script>
     <script src="../assets/js/d3.js"></script>
     <script src="../assets/js/jquery.min.js"></script>
     <script>
@@ -73,7 +74,7 @@
             $("#threat_title").text(title);
 
             if (filePath == undefined) {
-                filePath = 'json/threat-10_9_81_5.json';
+                filePath = otherDendro;
             }
 
             var width = $("#attack_path").width(),
@@ -109,7 +110,7 @@
                     .data(nodes)
                   .enter().append("g")
                     .attr("class", "node")
-                    .attr("transform", function (d) { return "translate(" + d.y + "," + d.x + ")"; })
+                    .attr("transform", function (d) { return "translate(" + d.y + "," + d.x + ")"; });
 
                 node.append("circle")
                     .attr("r", 9)

@@ -185,6 +185,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="../assets/js/app/conf.js"></script>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/d3.min.js"></script>
     <script src="../assets/js/cubehelix/cubehelix.js"></script>
@@ -195,18 +196,18 @@
 
         // Sconnects total (TOP 150)
 
-        var minSconnects = 0;
-
-        var maxSconnects = 3000;
-
-        var coff = maxSconnects - minSconnects;
-
-        var ldaScoresData = [];
-
-        var fport = 47999;
+//        var minSconnects = 0;
+//
+//        var maxSconnects = 3000;
+//
+//        var coff = maxSconnects - minSconnects;
+//
+//        var ldaScoresData = [];
+//
+//        var fport = 47999;
 
         // Default data path
-        var defaultPath = "vast"
+        var defaultPath = basePath;
 
         //Get data date from Query string
         var dateFromQueryString = getQueryString().dataDate;
@@ -230,14 +231,14 @@
 
             targetIpNodeId = targetIpNodeId || null;
 
-            var csvpath = "../data/user/"
+            var csvpath = basecsvpath;
 
             if (dateFromQueryString != undefined && dateFromQueryString != null)
                 csvpath = csvpath + dateFromQueryString.replace(/-/g, "");
             else
                 csvpath = csvpath + defaultPath;
 
-            csvpath = csvpath + "/flow_scores.csv"
+            csvpath = csvpath + flowFile;
 
             if (ldaScoresData.length > 0) {
                 filterDataAndBuildGraph(selectedEdgeId, sourceIpNodeId, targetIpNodeId, ldaScoresData);
@@ -266,7 +267,7 @@
             })
             .map(function (d) {
                 return { ip: d.srcIP, isInternal: +d.srcIpInternal};
-            })
+            });
 
             var nodes_2 = data.filter(function (d, i) {
                 if (i >= minSconnects && i < maxSconnects && d.sev == 0)
@@ -282,8 +283,8 @@
             // Get the edges from the data
             var edges = data.filter(function (d, i) { if (i >= minSconnects && i < maxSconnects && d.sev == 0) return d; })
             .map(function (d, i) {
-                var fSrc = nodes.map(function (n, i) { if (n.ip == d.srcIP) return i }).filter(isFinite)
-                var fDst = nodes.map(function (n, i) { if (n.ip == d.dstIP) return i }).filter(isFinite)
+                var fSrc = nodes.map(function (n, i) { if (n.ip == d.srcIP) return i }).filter(isFinite);
+                var fDst = nodes.map(function (n, i) { if (n.ip == d.dstIP) return i }).filter(isFinite);
                 return {
                     source: fSrc.length > 0 ? fSrc[0]: -1,
                     target: fDst.length > 0 ? fDst[0]: -1,
@@ -379,7 +380,7 @@
 
             // GROUP and append the nodes to the main SVG
 			//nodes = getFilteredNodes(nodes,edges.filter(function (d) { return (nodes[d.target].dport == fport) ||  (nodes[d.target].sport == fport) || (nodes[d.source].dport == fport) || (nodes[d.source].sport == fport) ; }) )
-			nodes = getFilteredNodes(nodes,edges.filter(function (d) { return (d.dport == fport) ||  (d.sport == fport)  ; }) )
+			nodes = getFilteredNodes(nodes,edges.filter(function (d) { return (d.dport == fport) ||  (d.sport == fport)  ; }) );
 
             var node = svg.append('g')
                          .selectAll('.node')
@@ -459,7 +460,7 @@
                        .style("stroke-opacity", "1")
                        .classed("blink_me", true)
                        .classed("active", true);
-                var parent = $("#" + selectedEdge.attr("id")).parent()
+                var parent = $("#" + selectedEdge.attr("id")).parent();
 
                 selectedEdge.remove();
 
@@ -476,14 +477,14 @@
 
         //load Chord diagram on the node click
         function nodeclick(d) {
-            var fpath = "chord-" + d.ip.replace(/\./g, "_") + ".tsv"
+            var fpath = "chord-" + d.ip.replace(/\./g, "_") + ".tsv";
             parent.document.getElementById('detailView').contentWindow.chord(fpath, d.ip);
         }
 
         function csvclick(d) {
             //
             var fpath = "edge-" + d.source.ip.replace(/\./g, "_") + "-" +
-                    d.target.ip.replace(/\./g, "_") + ".tsv"
+                    d.target.ip.replace(/\./g, "_") + ".tsv";
             //alert(fpath)
             parent.document.getElementById('detailView').contentWindow.details(fpath);
         }
@@ -528,7 +529,7 @@
                        .style("stroke-opacity", "1")
                        .classed("blink_me", true)
                        .classed("active", true);
-            var parent = $("#" + edge.attr("id")).parent()
+            var parent = $("#" + edge.attr("id")).parent();
             edge.remove();
             parent.append(edge[0]);
 
@@ -611,7 +612,7 @@
                 minSconnects = e.value.newValue[0];
             }
             else if (e.value.oldValue[1] != e.value.newValue[1]) {
-                maxSconnects = e.value.newValue[1]
+                maxSconnects = e.value.newValue[1];
                 minSconnects = e.value.newValue[1] - 150;
             }
             $("#dataRange").slider("setValue", [minSconnects, maxSconnects], true);

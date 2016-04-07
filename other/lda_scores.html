@@ -27,6 +27,7 @@ div {
 aside {background-color:#0071C5; color:#FFFFFF}
 
 </style>
+    <script type="text/javascript" src="../assets/js/app/conf.js"></script>
     <script type="text/javascript" src="../assets/js/d3.min.js"></script>
 
 
@@ -36,7 +37,7 @@ aside {background-color:#0071C5; color:#FFFFFF}
 connection to highlight it in the connection graph on the right.  <b>Click the connection</b> to generate all the log details in the detail
 view.</div>
     <script type="text/javascript">
-	var csvpath = "user/vast/lda_scores.csv";
+	var csvpath = ldaScores;
 	var coff = 150;
 
  d3.csv(csvpath, function(data) {
@@ -96,10 +97,10 @@ view.</div>
 				//d3.select("tr#row_" + id).classed('.active',false);
 				//d3.select("tr#row_" + id).classed('.active',true);
 				var fpath = "edge-" + d.srcIP.replace(/\./g,"_") + "-" +
-				d.dstIP.replace(/\./g,"_") +"-"+d.Date.split(' ')[1].split(':')[0] +"-"+d.Date.split(' ')[1].split(':')[1] + ".tsv"
+				d.dstIP.replace(/\./g,"_") +"-"+d.Date.split(' ')[1].split(':')[0] +"-"+d.Date.split(' ')[1].split(':')[1] + ".tsv";
 				//alert(fpath)
 				parent.document.getElementById('detailView').contentWindow.details(fpath);
-				return;
+
 
   	}
 </script>

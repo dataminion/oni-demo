@@ -16,11 +16,11 @@
             var nb, viz, blurb, threatFile, title, barsFile, timelineFile, mapFile;
             switch (topic) {
                 case "0406":
-                    nb = "dendro.html"
-                    viz = "globe.html"
+                    nb = "dendro.html";
+                    viz = "globe.html";
 				    blurb = "<b>0406 External/Internal Security Event</b><br /><p>Scanning activity on port 123 (Time synchronization) detected in netflows.  Two machines responded, a mail server and the admin server.  Compromise" +
 				    " was likely because a later scan coming from the mail server on port 25 (mail) was detected.  <p>An entire subnet was scanned - most of the hosts scanned did not exist." +
-				    "  some longer connections, treated as potential compromises, are being investigated as part of the incident response</p>"
+				    "  some longer connections, treated as potential compromises, are being investigated as part of the incident response</p>";
 				    threatFile = 'json/threat-10_9_81_5.json';
 				    barsFile = 'json/stats.json';
 				    timelineFile = 'user/vast/sbdet-10_9_81_5.tsv';
@@ -61,7 +61,7 @@
             parent.document.getElementById('barsView').contentWindow.buildGraph(barsFile);
             parent.document.getElementById('timeView').contentWindow.buildGraph(timelineFile);            
             parent.document.getElementById('mapView').contentWindow.buildGraph(mapFile);
-            javascript: document.getElementById('comms').innerHTML = blurb;
+            document.getElementById('comms').innerHTML = blurb;
             simulatedClick(parent.document.getElementById('overheadView'))
         }
 
@@ -87,7 +87,7 @@
                 metaKey: options.metaKey || false, //I *think* 'meta' is 'Cmd/Apple' on Mac, and 'Windows key' on Win. Not sure, though!
                 button: options.button || 0, //0 = left, 1 = middle, 2 = right
                 relatedTarget: options.relatedTarget || null,
-            }
+            };
 
             //Pass in the options
             event.initMouseEvent(

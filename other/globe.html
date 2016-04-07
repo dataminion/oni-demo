@@ -76,6 +76,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="../assets/js/app/conf.js"></script>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/d3.min.js"></script>
     <script src="../assets/js/queue.v1.min.js"></script>
@@ -98,7 +99,7 @@
 
         function buildGraph(filePath) {
             $("#container").html("");
-            filePath = filePath == undefined ? "json/places_attack.json" : filePath;
+            filePath = filePath == undefined ? placesAtack : filePath;
 
             fill = d3.scale.ordinal()
                    .domain(d3.range(4))
@@ -138,7 +139,7 @@
                         .on("mousedown", mousedown);
 
             queue()
-                .defer(d3.json, "json/world-110m.json")
+                .defer(d3.json, placesGlobe)
                 .defer(d3.json, filePath)
                 .await(ready);
         }
@@ -168,10 +169,10 @@
                   .attr("cy", "45%");
             globe_shading.append("stop")
               .attr("offset", "30%").attr("stop-color", "#fff")
-              .attr("stop-opacity", "0")
+              .attr("stop-opacity", "0");
             globe_shading.append("stop")
               .attr("offset", "100%").attr("stop-color", "#505962")
-              .attr("stop-opacity", "0.3")
+              .attr("stop-opacity", "0.3");
 
             var drop_shadow = svg.append("defs").append("radialGradient")
                   .attr("id", "drop_shadow")
@@ -179,10 +180,10 @@
                   .attr("cy", "50%");
             drop_shadow.append("stop")
               .attr("offset", "20%").attr("stop-color", "#000")
-              .attr("stop-opacity", ".5")
+              .attr("stop-opacity", ".5");
             drop_shadow.append("stop")
               .attr("offset", "100%").attr("stop-color", "#000")
-              .attr("stop-opacity", "0")
+              .attr("stop-opacity", "0");
 
             svg.append("ellipse")
               .attr("cx", width * 0.8).attr("cy", height * 0.87) // Locate the Ellipse at 80% of the width and 87% of the height
@@ -241,15 +242,15 @@
 
             // build geoJSON features from links array
             links.forEach(function (e, i, a) {
-                var feature = { "type": "Feature", "geometry": { "type": "LineString", "coordinates": [e.source, e.target] } }
+                var feature = { "type": "Feature", "geometry": { "type": "LineString", "coordinates": [e.source, e.target] } };
                 arcLines.push(feature)
-            })
+            });
 
             svg.append("g").attr("class", "arcs")
               .selectAll("path").data(arcLines)
               .enter().append("path")
                 .attr("class", "arc")
-                .attr("d", path)
+                .attr("d", path);
 
             svg.append("g").attr("class", "flyers")
               .selectAll("path").data(links)
@@ -260,7 +261,7 @@
               })
               .attr("d", function (d) {
                   return swoosh(flying_arc(d));
-              })
+              });
 
             refresh();
         }
@@ -272,7 +273,7 @@
             var mid = location_along_arc(source, target, 1);
             var result = [proj(source),
                            sky(mid),
-                           proj(target)]
+                           proj(target)];
             return result;
         }
 
@@ -285,7 +286,7 @@
             svg.selectAll(".arc").attr("d", path)
               .attr("opacity", function (d) {
                   return fade_at_edge(d)
-              })
+              });
 
             svg.selectAll(".flyer")
               .attr("d", function (d) {
@@ -313,7 +314,7 @@
             var start_dist = 1.87 - arc.distance({ source: start, target: centerPos }), //1.57
                 end_dist = 1.87 - arc.distance({ source: end, target: centerPos });
 
-            var fade = d3.scale.linear().domain([-.1, 0]).range([0, .1])
+            var fade = d3.scale.linear().domain([-.1, 0]).range([0, .1]);
             var dist = start_dist < end_dist ? start_dist : end_dist;
 
             return fade(dist)

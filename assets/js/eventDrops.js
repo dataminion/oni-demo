@@ -10,7 +10,7 @@
 "use strict";var eventDrops=require("./eventDrops");"function"==typeof define&&define.amd?define("d3.chart.eventDrops",["d3"],function(e){e.chart=e.chart||{},e.chart.eventDrops=eventDrops(e)}):window?(window.d3.chart=window.d3.chart||{},window.d3.chart.eventDrops=eventDrops(window.d3)):module.exports=eventDrops;
 },{"./eventDrops":2}],6:[function(require,module,exports){
 module.exports=function(n,r,t){t=t||{};for(var o in r)!function(o){n[o]=function(e){return arguments.length?(r[o]=e,t.hasOwnProperty(o)&&t[o](e),n):r[o]}}(o)};
-},{}]},{},[5])
+},{}]},{},[5]);
 
 
 //# sourceMappingURL=bundle.map.json
