@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>Ingest Area Chart</title>
-    <script src="js/d3.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/custom.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <script src="assets/js/d3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/css/custom.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
     <style type="text/css">
         html, body, body > div.container-fluid, body > div.container-fluid > *{
             height: 100%;
@@ -183,7 +183,7 @@
                 .attr("height", h);
 
             // Bind the Data
-            d3.csv("dataset/ingest_summary.csv", function (data) {
+            d3.csv("data/dataset/ingest_summary.csv", function (data) {
 
                 // Parse dates and numbers.
                 data.forEach(function (d) {

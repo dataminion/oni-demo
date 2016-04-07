@@ -5,10 +5,10 @@
     <!--CDN for font awesome ICONS-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!--IT MLAF Styles Sheet (Based on bootstrap)-->
-    <link rel="stylesheet" type="text/css" href="css/custom.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/custom.min.css" />
     <!--Bootstrap Date picker styles-->
-    <link rel="stylesheet" href="css/bootstrap-datepicker3.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
     <style>
         html {
             /*height: 100%;*/
@@ -237,7 +237,7 @@
                                 <button id="btnToggleLdaScores" data-target="#lda_scores" class="btn btn-default btn-xs">Expand</button>
                             </div>
                         </div>
-                        <iframe name="ovrView" id="ovrView" class="ovrView" src="sconnects_scores.html"></iframe>
+                        <iframe name="ovrView" id="ovrView" class="ovrView" src="sconnects/sconnects_scores.html"></iframe>
                     </div>
                     <div class="col-lg-12 section padding2 " id="notebook">
                         <div class="col-lg-12 bg-primary rounded">
@@ -248,7 +248,7 @@
                                 <button id="btnToggleNotebook" data-target="#notebook" class="btn btn-default btn-xs">Expand</button>
                             </div>
                         </div>
-                        <iframe name="nbView" id="nbView" class="nbView" src="../../notebooks/user/20150418/Edge_Investigation_20150418.ipynb"></iframe>
+                        <iframe name="nbView" id="nbView" class="nbView" src="../notebooks/python/notebooks/Edge_Investigation_vast.ipynb"></iframe>
                     </div>
 
                 </div>
@@ -265,7 +265,7 @@
                                 <button id="btnToggleNetflowDiagram" data-target="#netflow_diagram" class="btn btn-default btn-xs">Expand</button>
                             </div>
                         </div>
-                        <iframe name="vizView" id="vizView" class="vizView" src="sconnects_netflow.html"></iframe>
+                        <iframe name="vizView" id="vizView" class="vizView" src="sconnects/sconnects_netflow.html"></iframe>
                     </div>
                     <div class="col-lg-12 section padding2 " id="details">
                         <div class="col-lg-12 bg-primary rounded">
@@ -276,7 +276,7 @@
                                 <button id="btnToggleDetails" data-target="#details" class="btn btn-default btn-xs">Expand</button>
                             </div>
                         </div>
-                        <iframe name="detailView" id="detailView" class="detailView" src="sconnects_details.html"></iframe>
+                        <iframe name="detailView" id="detailView" class="detailView" src="sconnects/sconnects_details.html"></iframe>
                     </div>
                 </div>
             </div>
@@ -284,11 +284,10 @@
     </div>
 
     <!-- SCRIPTS -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-datepicker.min.js"></script>
-    <script src="js/bootstrap-slider.min.js"></script>
-    <script src="js/utils.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/js/bootstrap-slider.min.js"></script>
     <script>
 
         var minSconnects = 0;
@@ -460,14 +459,14 @@
         */
 
         function getNotebookPath() {
-            var path = "../../notebooks/user/"
+            var path = "../notebooks/python/notebooks/user/"
             var dataDate = getParam("dataDate"); // == undefined ? "20150417" : getParam("dataDate").replace(/-/g, "");
 
             if (dataDate != undefined && dataDate != null) {
                 path = path + dataDate + "/Edge_Investigation_" + dataDate + ".ipynb"
             }
             else {
-                path = "../../notebooks/vast/Edge_Investigation_vast.ipynb"
+                path = "../notebooks/python/notebooks/Edge_Investigation_vast.ipynb"
             }
 
             return path;
